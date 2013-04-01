@@ -19,6 +19,7 @@ class WorkerThread(threading.Thread) :
 			print "Scanning Port %d..."%counter
 
 	    s = socket(AF_INET, SOCK_STREAM)
+	    s.settimeout(1.0)
 	    result = s.connect_ex((targetIP, counter))
    	    if(result == 0) :
             	list.append('Port %d: OPEN' % (counter,))
@@ -42,7 +43,7 @@ else :
 
 print "\nStarting scan on host", targetIP, "Ports 20 -", ports
 
-for j in range(20, ports):
+for j in range(20, ports+1):
  	queue.put(j)
 
 for i in range(25) :
